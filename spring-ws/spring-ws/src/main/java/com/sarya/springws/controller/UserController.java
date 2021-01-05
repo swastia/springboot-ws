@@ -29,6 +29,10 @@ public class UserController {
     @GetMapping
     public String getUsers(@RequestParam (value="page", defaultValue = "1") int page,
                            @RequestParam(value = "limit", defaultValue = "20") int limit){
+
+        String firstName = null;
+        firstName.length();
+
         return MessageFormat.format("Get Request called with page: {0} and limit: {1}", page, limit);
     }
 
@@ -60,12 +64,10 @@ public class UserController {
     }
 
     @PutMapping
-    public String updateUsers(String userId, @RequestBody UserDetailsRequest user){
-
-        if(users.isEmpty()){
-
-        }
-        return "Update request called";
+    public User updateUsers(@PathVariable String userId, @RequestBody UserDetailsRequest user) {
+        User storedUserDetails = users.get(userId);
+        storedUserDetails.setEmail(user.getEmail());
+        return storedUserDetails;
     }
 
     @DeleteMapping
